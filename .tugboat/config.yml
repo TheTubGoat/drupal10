@@ -60,7 +60,7 @@ services:
         # For staging purposes, we're going to move the tarball out of the
         # webroot as if it were securely created from this environment and
         # for extraction by another server.
-        - mv "${TUGBOAT_ROOT]/files.tar.gz" /tmp/
+        - mv "${TUGBOAT_ROOT}/files.tar.gz" /tmp/
 
         # Set file permissions such that Drupal will not complain.
         - chgrp -R www-data "${DOCROOT}/sites/default/files"
