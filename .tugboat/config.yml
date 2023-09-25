@@ -1,7 +1,7 @@
 services:
   # What to call the service hosting the site.
   php:
-    # Use PHP 8.x with Apache; this syntax pulls in the latest version of PHP 7
+    # Use PHP 8.x with Apache; this syntax pulls in the latest version of PHP 8.
     image: tugboatqa/php:8.1-apache
 
     # Set this as the default service. This does a few things
@@ -42,7 +42,7 @@ services:
         - composer install --optimize-autoloader
 
         # Use the tugboat-specific Drupal settings.
-        - cp "${TUGBOAT_ROOT}/.tugboat/default.settings.php" "${DOCROOT}/sites/default/settings.php"
+        - cp "${TUGBOAT_ROOT}/.tugboat/settings.local.php" "${DOCROOT}/sites/default/settings.local.php"
 
         # A common practice in many Drupal projects is to store the config and
         # private files outside of the Drupal root. If that's the case for your
