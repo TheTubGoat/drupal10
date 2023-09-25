@@ -57,10 +57,11 @@ services:
         - mkdir -p "${DOCROOT}/sites/default/files"
         - cd ${DOCROOT}/sites/default; tar -xzf "${TUGBOAT_ROOT}/files.tar.gz"
 
-        # For staging purposes, we're going to move the tarball out of the
+        # For staging purposes, we're going to move the assets out of the
         # webroot as if it were securely created from this environment and
         # for extraction by another server.
         - mv "${TUGBOAT_ROOT}/files.tar.gz" /tmp/
+        - mv "${TUGBOAT_ROOT}/tugboatdb.sql.gz" /tmp/
 
         # Set file permissions such that Drupal will not complain.
         - chgrp -R www-data "${DOCROOT}/sites/default/files"
@@ -109,12 +110,7 @@ services:
       # skipping the init step, because the results of that step will
       # already be present.
       update:
-      # Copy a database dump from an external server. The public
-      # SSH key found in the Tugboat Repository configuration must be
-      # copied to the external server in order to use scp.
+        # Copy a database dump from an external server. The public
+        # SSH key found in the Tugboat Repository configuration must be
+        # copied to the external server in order to use scp.
         - zcat "${TUGBOAT_ROOT}/tugboatdb.sql.gz" | mysql tugboat
-
-        # For staging purposes, we'll move the dump file out of the webroot
-        # as if it were securely dumped from this environment for another
-        # server to fetch.
-        - mv "${TUGBOAT_ROOT}/tugboatdb.sql.gz" /tmp/
