@@ -52,8 +52,17 @@ services:
         - ln -snf "${TUGBOAT_ROOT}/files-private" "${DOCROOT}/../files-private"
         - ln -snf "${TUGBOAT_ROOT}/custom/themes" "${DOCROOT}/themes/custom"
 
-        # Set file permissions such that Drupal will not complain
+
+        # Import files.
         - mkdir -p "${DOCROOT}/sites/default/files"
+        - tar -xzf ${TUGBOAT_ROOT}/files.tar.gz ${DOCROOT}/sites/default/files
+
+        # For staging purposes, we're going to move the tarball out of the
+        # webroot as if it were securely created from this environment and
+        # for extraction by another server.
+        - mv ${TUGBOAT_ROOT]/files.tar.gz /tmp/
+
+        # Set file permissions such that Drupal will not complain.
         - chgrp -R www-data "${DOCROOT}/sites/default/files"
         - find "${DOCROOT}/sites/default/files" -type d -exec chmod 2775 {} \;
         - find "${DOCROOT}/sites/default/files" -type f -exec chmod 0664 {} \;
@@ -72,9 +81,9 @@ services:
 
         # File Sync Alternative: Enable Stage File Proxy.
         # This must be enabled after the config sync, otherwise Drupal will disable it when it runs the config sync.
-        - vendor/bin/drush -r "${DOCROOT}" pm-enable --yes stage_file_proxy
-        - vendor/bin/drush -r "${DOCROOT}" config:set stage_file_proxy.settings origin nginx.main.demo-lullabot-drupalfull.us2.amazee.io
-        - vendor/bin/drush cache:rebuild
+#        - vendor/bin/drush -r "${DOCROOT}" pm-enable --yes stage_file_proxy
+#        - vendor/bin/drush -r "${DOCROOT}" config:set stage_file_proxy.settings origin nginx.main.demo-lullabot-drupalfull.us2.amazee.io
+#        - vendor/bin/drush cache:rebuild
 
     urls:
       - /
@@ -104,3 +113,8 @@ services:
       # SSH key found in the Tugboat Repository configuration must be
       # copied to the external server in order to use scp.
         - zcat ${TUGBOAT_ROOT}/tugboatdb.sql.gz | mysql tugboat
+
+        # For staging purposes, we'll move the dump file out of the webroot
+        # as if it were securely dumped from this environment for another
+        # server to fetch.
+        - mv ${TUGBOAT_ROOT}/tugboatdb.sql.gz /tmp/
