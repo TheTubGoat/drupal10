@@ -1,4 +1,14 @@
 vendor
-web
 .idea
 .ddev
+
+# Preserve base Drupal config.
+!web/
+web/*
+
+!web/sites
+web/sites/*
+
+!web/sites/default
+web/sites/default/*
+!web/sites/default/settings.php
