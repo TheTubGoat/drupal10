@@ -14,7 +14,7 @@ services:
 
       update:
         # Get the database dump from an upstream environment.
-        - rsync -av -O /tmp/tugboatdb.sql.gz https://raw.githubusercontent.com/TheTubGoat/drupal10/stage/tugboatdb.sql.gz
+        - wget https://raw.githubusercontent.com/TheTubGoat/drupal10/stage/tugboatdb.sql.gz -O /tmp/tugboatdb.sql.gz
         - zcat /tmp/tugboatdb.sql.gz | mysql tugboat
         - rm /tmp/tugboatdb.sql.gz
 
