@@ -53,7 +53,12 @@ services:
         # Use the tugboat-specific Drupal settings.
         - cp "${TUGBOAT_ROOT}/.tugboat/settings.local.php" "${DOCROOT}/sites/default/settings.local.php"
 
+        # Link our custom code.
         - ln -snf "${TUGBOAT_ROOT}/custom/themes" "${DOCROOT}/themes/custom"
+
+        # Make sure our files and translations folders exists and are writable.
+        - mkdir -p "${DOCROOT}/sites/default/files/translations"
+        - chgrp -R www-data "${DOCROOT}/sites/default/files"
 
         # Enable Stage File Proxy to sync files.
         - composer require --dev drupal/stage_file_proxy
