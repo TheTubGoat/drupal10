@@ -29,7 +29,7 @@ services:
     #   3. Routes requests to the preview URL to this service
     default: true
 
-    # Wait until the mysql service is done building
+    # Wait until the mysql service is done building.
     depends: mysql
 
     commands:
