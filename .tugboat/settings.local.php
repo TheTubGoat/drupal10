@@ -1,21 +1,18 @@
 <?php
-
-// phpcs:ignoreFile
-
-$databases['default']['default'] = [
+$databases['default']['default'] = array (
   'database' => 'tugboat',
   'username' => 'tugboat',
   'password' => 'tugboat',
+  'prefix' => '',
   'host' => 'mysql',
   'port' => '3306',
-  'driver' => 'mysql',
-  'prefix' => '',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'collation' => 'utf8mb4_general_ci',
-];
+  'driver' => 'mysql',
+);
+
+// Use the TUGBOAT_REPO_ID to generate a hash salt for Tugboat sites.
+$settings['hash_salt'] = hash('sha256', getenv('TUGBOAT_REPO_ID'));
 
 $settings['config_sync_directory'] = '../config';
 
-$settings['hash_salt'] = hash('sha256', getenv('TUGBOAT_REPO_ID'));
-
-$settings['file_private_path'] = '../files-private';
+$settings['file_private_path'] = '../files_private';
