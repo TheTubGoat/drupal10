@@ -1,5 +1,6 @@
 services:
-  mysql:
+  # Define the database service.
+  database:
     # Use the latest available 5.x version of MySQL
     image: tugboatqa/mariadb:10.5
 
@@ -18,8 +19,8 @@ services:
         - zcat /tmp/tugboatdb.sql.gz | mysql tugboat
         - rm /tmp/tugboatdb.sql.gz
 
-  # What to call the service hosting the site.
-  php:
+  # Define the webserver service.
+  webserver:
     # This uses PHP 8.1.x with Apache: update to match your version of PHP
     image: tugboatqa/php:8.1-apache
 
@@ -30,7 +31,7 @@ services:
     default: true
 
     # Wait until the mysql service is done building.
-    depends: mysql
+    depends: database
 
     commands:
       init:
