@@ -1,6 +1,7 @@
 vendor
 .idea
 .ddev
+web/sites/default/settings.local.php
 
 # Preserve base Drupal config.
 !web/
