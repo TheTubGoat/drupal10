@@ -5,18 +5,19 @@ services:
     image: tugboatqa/mariadb:10.5
     commands:
       # Configure the server for the site to run on.
-      init: []
-      # Adjust memory limits and configuration to fit Drupal.
+      init:
+        # Adjust memory limits and configuration to fit Drupal.
 
 
       # Install any assets and libraries that this database needs, like...the database.
-      update: []
-      # Fetch and install the database dump from an upstream environment.
+      update:
+        # Fetch and install the database dump from an upstream environment.
 
 
       # Run any scripts needed to prepare the database for use.
-      build: []
-      # There are generally no build steps at the database level.
+      build:
+        # There are generally no build steps at the database level.
+
 
   # Define the webserver service.
   webserver:
@@ -34,30 +35,30 @@ services:
     commands:
       # Configure the webserver to support Drupal.
       init:
-      # Install any extra modules Drupal needs.
+        # Install any extra modules Drupal needs.
 
-      # Create any directories Drupal needs outside the docroot.
+        # Create any directories Drupal needs outside the docroot.
 
 
       # Install any assets and libraries that our site needs to operate.
       update:
-      # Install/update packages managed by composer, including Drush and Stage File Proxy.
+        # Install/update packages managed by composer, including Drush and Stage File Proxy.
 
-      # Tell Tugboat where our webroot is.
+        # Tell Tugboat where our webroot is.
 
-      # Set our tugboat-specific Drupal settings.
+        # Set our tugboat-specific Drupal settings.
 
-      # Link our custom code.
+        # Link our custom code.
 
-      # Make sure our public files and folders exist and are writable.
+        # Make sure our public files and folders exist and are writable.
 
 
       # Run any scripts that Drupal needs to prepare for use after code changes.
       build:
-      # Sync config.
+        # Sync config.
 
-      # Run database updates.
+        # Run database updates.
 
-      # Enable Stage File Proxy
+        # Enable Stage File Proxy.
 
-      # Rebuild the cache.
+        # Rebuild the cache.
