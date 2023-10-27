@@ -39,12 +39,12 @@ services:
 
         # Create any directories Drupal needs outside the docroot.
 
+        # Tell Tugboat where our webroot is.
+
 
       # Install any assets and libraries that our site needs to operate.
       update:
         # Install/update packages managed by composer, including Drush and Stage File Proxy.
-
-        # Tell Tugboat where our webroot is.
 
         # Set our tugboat-specific Drupal settings.
 
