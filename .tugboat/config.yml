@@ -1,0 +1,64 @@
+# Define the services Drupal needs to run.
+services:
+  # Define the database service.
+  database:
+    image: tugboatqa/mariadb:10.5
+    commands:
+      # Configure the server for the site to run on.
+      init:
+      # Adjust memory limits and configuration to fit Drupal.
+
+
+      # Install any assets and libraries that this database needs, like...the database.
+      update:
+      # Fetch and install the database dump from an upstream environment.
+
+
+      # Run any scripts needed to prepare the database for use.
+      build:
+      # There are generally no build steps at the database level.
+
+
+  # Define the webserver service.
+  webserver:
+    image: tugboatqa/php:8.1-apache
+
+    # Set this as the default service. This does a few things
+    #   1. Clones the git repository into the service container
+    #   2. Exposes port 80 to the Tugboat HTTP proxy
+    #   3. Routes requests to the preview URL to this service
+    default: true
+
+    # Wait until the mysql service is done building.
+    depends: database
+
+    commands:
+      # Configure the webserver to support Drupal.
+      init:
+      # Install any extra modules Drupal needs.
+
+      # Create any directories Drupal needs outside the docroot.
+
+      # Tell Tugboat where our webroot is.
+
+
+      # Install any assets and libraries that our site needs to operate.
+      update:
+      # Install/update packages managed by composer, including Drush and Stage File Proxy.
+
+      # Set our tugboat-specific Drupal settings.
+
+      # Link our custom code.
+
+      # Make sure our public files and folders exist and are writable.
+
+
+      # Run any scripts that Drupal needs to prepare for use after code changes.
+      build:
+      # Sync config.
+
+      # Run database updates.
+
+      # Enable Stage File Proxy.
+
+      # Rebuild the cache.
