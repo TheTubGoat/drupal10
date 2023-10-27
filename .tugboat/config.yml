@@ -79,6 +79,7 @@ services:
         # to enable Stage File Proxy.
         - vendor/bin/drush pm:enable --yes stage_file_proxy
         - vendor/bin/drush config:set --yes stage_file_proxy.settings origin "https://stage-l85od8fgqlcki5azigoxxmkgj0em5ac3.tugboatqa.com"
+        - vendor/bin/drush config:set --yes stage_file_proxy.settings verify true
 
         # One last cache rebuild.
         - vendor/bin/drush cache:rebuild
