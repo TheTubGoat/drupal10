@@ -38,6 +38,9 @@ services:
     # Wait until the mysql service is done building.
     depends: database
 
+    urls:
+      - /
+
     commands:
       # Configure the webserver to support Drupal.
       init:
