@@ -22,7 +22,7 @@ services:
 
       # Run any scripts needed to prepare the database for use.
       build:
-      # There are generally no build steps at the database level.
+        # There are generally no build steps at the database level.
 
 
   # Define the webserver service.
